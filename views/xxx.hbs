@@ -1,0 +1,82 @@
+
+
+
+
+    <style type="text/css">
+    .pie {
+    fill: transparent;
+    stroke: #009688;
+    stroke-width: 2;
+    stroke-dasharray: 0 10000000;
+    transition: stroke-dasharray .5s ease;
+  }
+
+  .chart {
+    margin: 0 auto;
+    transform: rotate(180deg);
+    border-radius: 50%;
+    display: block;
+  }
+
+  body {
+    padding: 40px;
+    font-family: sans-serif;
+    text-align: center;
+  }
+
+    </style>
+
+    <figure>
+       <!--start 开始时间 end 结束时间-->
+      <svg width="116" height="116" class="chart" id="svgcon">
+        <!-- <circle r="55" cx="58" cy="58" class="pie" stroke="#009688" start="15" end="28"/>
+       <circle r="50" cx="58" cy="58" class="pie" stroke="#009688" start="3" end="7"/>
+        <circle r="45" cx="58" cy="58" class="pie" stroke="#009688" start="1" end="10"/>
+        <circle r="40" cx="58" cy="58" class="pie" stroke="#00000" start="0" end="7" /> -->
+      </svg>
+    </figure>
+
+
+<script src="/javascripts/jquery-1.12.3.min.js"></script>
+<script type="text/javascript">
+
+var $pie = $('.pie');
+//30天
+var month = 30;
+
+function start() {
+
+  var svgCC = document.getElementById("svgcon");
+  var circle = document.createElement("cicle");
+  circle.setAttribute("r", '50');
+  circle.setAttribute("cx", '58');
+  circle.setAttribute("cy", '58');
+  circle.setAttribute("stroke",'#009688');
+  circle.setAttribute("start",'15');
+  circle.setAttribute("end",'28');
+  svgCC.appendChild(circle);
+
+
+
+
+
+$pie.each(function() {
+  var radius = $(this).attr('r'),
+    circumference = 2 * Math.PI * radius,
+    start_day = $(this).attr('start'),
+    end_day = $(this).attr('end'),
+    spend_day = end_day - start_day || 1,
+    spend_day = circumference / 2 * spend_day / month;
+  $(this).css({
+    'stroke-dashoffset': (circumference / 2 * start_day / month) * -1,
+    'stroke-dasharray': '' + spend_day + ' ' + circumference
+  })
+
+})
+}
+start();
+</script>
+
+
+
+<script src="/javascripts/daka.js"></script>
